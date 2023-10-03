@@ -1,0 +1,40 @@
+# netlify.toml
+
+# Ustawienia budowania
+[build]
+  # Katalog, w którym znajduje się Twój kod źródłowy
+  base = "public"
+
+  # Polecenie, które będzie uruchamiane podczas budowania projektu
+  command = "npm run build"
+
+# Przekierowania i obsługa formularzy
+[[redirects]]
+  # Przykład przekierowania z /stara-strona do /nowa-strona
+  from = "/stara-strona"
+  to = "/nowa-strona"
+  status = 301
+
+[[headers]]
+  # Przykład ustawienia nagłówka cache-control dla plików CSS
+  for = "/css/*"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000"
+
+# Ustawienia obsługi formularzy (opcjonalne)
+[[forms]]
+  # Nazwa formularza
+  name = "kontakt"
+
+  # Akcja po wysłaniu formularza
+  action = "/dziekujemy-za-kontakt"
+
+  # Metoda przesyłania danych (GET lub POST)
+  method = "POST"
+
+# Inne ustawienia, takie jak environment variables
+[context.production.environment]
+  NODE_ENV = "production"
+
+[context.deploy-preview.environment]
+  NODE_ENV = "development"
